@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "Lista";
+}
+
+<h2>Lista</h2>
+<p>
+    Poniżej przedstawiam implementację listy dwukierunkowej. Lista taka oferuje operacje wstawiania i usuwania w czasie stałym.
+    Aby dostać się do elementów potrzebna jest jednak liniowa względem długości listy ilość operacji. Jest to specyfika tej struktury:
+    pamiętamy jedynie wskaźnik na początek i koniec, kolejne węzły wskazują na swojego poprzednika i następcę.
+</p>
+<p>
+    <i>
+        Operacje wstawiania i usuwania są wykonywane w czasie stałym zawsze, jeśli robimy to na początku lub końcu listy.
+        Jeśli chcemy wstawić lub usunąć element ze środka listy, musimy znać węzeł sąsiedni w przypadku wstawiania,
+        lub węzeł który chcemy usunąć. Jeśli nie znamy tego węzła, będziemy musieli wykonać dodatkowo kosztowne wyszukiwanie.
+    </i>
+</p>
+<p>
+    Lista dwukierunkowa może być użyta jako @Html.ActionLink("stos", "Stack") lub @Html.ActionLink("kolejka", "Queue"),
+    w zależności jakie operacje udostępnimy.
+</p>
+<p>
+    Na liście dwukierunkowej, której implementacja jest poniżej można na niej wykonać poniższe operacje:
+    <ul>
+        <li>Inicjalizacja jako pusta lista.</li>
+        <li>Inicjalizacja elementami innej kolekcji.</li>
+        <li>Skonwertowanie listy na kolekcję typu IEnumerable.</li>
+        <li>Pobranie ilości elementów.</li>
+        <li>Pobranie pierwszego elementu.</li>
+        <li>Pobranie ostatniego elementu.</li>
+        <li>Dodanie elementu na pierwszą pozycję.</li>
+        <li>Dodanie elementu na ostatnią pozycję.</li>
+        <li>Dodanie elementu przed danym węzłem.</li>
+        <li>Dodanie elementu po danym węźle.</li>
+        <li>Wyczyszczenie listy.</li>
+        <li>Usunięcie elementu (jego pierwszego wystąpienia).</li>
+        <li>Usunięcie węzła.</li>
+        <li>Usunięcie pierwszego elementu.</li>
+        <li>Usunięcie ostatniego elementu.</li>
+        <li>Sprawdzenie czy lista zawiera dany element.</li>
+        <li>Pobranie węzłą o podanej wartości.</li>
+    </ul>
+</p>
+<h3>Kod źródłowy</h3>
+<pre>
+public class List&lt;T&gt;
+{
+    public List() { }<br />
+    public List(IEnumerable&lt;T&gt; collection)
+    {
+        if (!collection.Empty())
+            ConvertCollectionToList(collection);
+    }<br />
+    private void ConvertCollectionToList(IEnumerable&lt;T&gt; collection)
+    {
+        foreach (var item in collection)
+            AddLast(item);
+    }<br />
+    public IEnumerable&lt;T&gt; ToEnumerable()
+    {
+        var current = First;
+        while (current != null)
+        {
+            yield return current.Value;
+            current = current.Next;
+        }
+    }<br />
+    public int Count { get; set; }<br />
+    public ListNode&lt;T&gt; First { get; set; }<br />
+    public ListNode&lt;T&gt; Last { get; set; }<br />
+    public void AddFirst(T item)
+    {
+        if (First == null)
+        {
+            First = Last = new ListNode&lt;T&gt;(item, this);
+        }
+        else
+        {
+            First.Previous = new ListNode&lt;T&gt;(item, this);
+            First.Previous.Next = First;
+            First = First.Previous;
+        }<br />
+        Count++;
+    }<br />
+    public void AddLast(T item)
+    {
+        if (Last == null)
+        {
+            First = Last = new ListNode&lt;T&gt;(item, this);
+        }
+        else
+        {
+            Last.Next = new ListNode&lt;T&gt;(item, this);
+            Last.Next.Previous = Last;
+            Last = Last.Next;
+        }<br />
+        Count++;
+    }<br />
+    public void AddAfter(ListNode&lt;T&gt; node, T item)
+    {
+        if (node == null)
+            throw new ArgumentException("Nodes cannot be null.");<br />
+        if (Last.Equals(node))
+            AddLast(item);
+        else
+        {
+            var newNode = new ListNode&lt;T&gt;(item, this);
+            newNode.Previous = node;
+            newNode.Next = node.Next;
+            node.Next.Previous = newNode;
+            node.Next = newNode;<br />
+            Count++;
+        }
+    }<br />
+    public void AddBefore(ListNode&lt;T&gt; node, T item)
+    {
+        if (node == null)
+            throw new ArgumentException("Nodes cannot be null.");<br />
+        if (First.Equals(node))
+            AddFirst(item);
+        else
+        {
+            var newNode = new ListNode&lt;T&gt;(item, this);
+            newNode.Previous = node.Previous;
+            newNode.Next = node;
+            node.Previous.Next = newNode;
+            node.Previous = newNode;<br />
+            Count++;
+        }
+    }<br />
+    public void Clear()
+    {
+        while (Count != 0)
+            RemoveLast();
+    }<br />
+    public bool Remove(T item)
+    {
+        var node = Find(item);
+        if (node == null)
+            return false;<br />
+        Remove(node);
+        return true;
+    }<br />
+    public void Remove(ListNode&lt;T&gt; node)
+    {
+        if (node == null)
+            throw new ArgumentException("Node to delete cannot be null.");
+        if (!this.Equals(node.List))
+            throw new ArgumentException("Node to delete must be from the list, on which operation was invoked.");
+        if (First.Equals(node))
+            RemoveFirst();
+        else if (Last.Equals(node))
+            RemoveLast();
+        else
+            RemoveElement(node);
+    }<br />
+    public void RemoveFirst()
+    {
+        if (Count == 0)
+            throw new InvalidOperationException();
+        if (Count == 1)
+            RemoveOnlyElement();
+        else
+            RemoveFirstElement();
+    }<br />
+    public void RemoveLast()
+    {
+        if (Count == 0)
+            throw new InvalidOperationException();
+        if (Count == 1)
+            RemoveOnlyElement();
+        else
+            RemoveLastElement();
+    }<br />
+    private void RemoveElement(ListNode&lt;T&gt; node)
+    {
+        node.Previous.Next = node.Next;
+        node.Next.Previous = node.Previous;
+        Count--;
+    }<br />
+    private void RemoveOnlyElement()
+    {
+        First = Last = null;
+        Count--;
+    }<br />
+    private void RemoveFirstElement()
+    {
+        First.Next.Previous = null;
+        First = First.Next;
+        Count--;
+    }<br />
+    private void RemoveLastElement()
+    {
+        Last.Previous.Next = null;
+        Last = Last.Previous;
+        Count--;
+    }<br />
+    public bool Contains(T item)
+    {
+        return Find(item) != null;
+    }<br />
+    public ListNode&lt;T&gt; Find(T item)
+    {
+        var current = First;
+        while (current != null)
+        {
+            if (current.Value.Equals(item))
+                break;
+            current = current.Next;
+        }
+        return current;
+    }
+}<br />
+public class ListNode&lt;T&gt;
+{
+    public ListNode(T item, List&lt;T&gt; list)
+    {
+        Value = item;
+        List = list;
+    }<br />
+    public List&lt;T&gt; List { get; set; }
+    public T Value { get; set; }
+    public ListNode&lt;T&gt; Next { get; set; }
+    public ListNode&lt;T&gt; Previous { get; set; }
+}
+</pre>

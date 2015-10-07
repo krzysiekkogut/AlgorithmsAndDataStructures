@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Kolejka";
+}
+
+<h2>Kolejka</h2>
+<p>
+    Kolejka to kolekcja danych porządku FIFO (First In First Out). Tak jak w sklpie: kto pierwszy się ustawi w kolejce,
+    ten pierwszy zostanie obsłużony.
+</p>
+<p>
+    Do implementacji wykorzystałem zaimplementowaną wcześniej @Html.ActionLink("listę dwukierunkową", "List"),
+    opakowaując ją i wystawiąjąc odpowiednie metody.
+</p>
+<h3>Kod źródłowy</h3>
+<pre>
+public class Queue&lt;T&gt;
+{
+    private List&lt;T&gt; _data;<br />
+    public Queue()
+    {
+        _data = new List&lt;T&gt;();
+    }<br />
+    public int Count { get { return _data.Count; } }<br />
+    public void Enqueue(T item)
+    {
+        _data.AddLast(item);
+    }<br />
+    public T Dequeue()
+    {
+        var result = _data.First;
+        _data.RemoveFirst();
+        return result.Value;
+    }<br />
+    public void Clear()
+    {
+        _data.Clear();
+    }
+}
+</pre>

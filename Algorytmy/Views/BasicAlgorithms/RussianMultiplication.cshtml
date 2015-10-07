@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Mnożenie po rosyjsku";
+}
+
+<script>
+    function getResults() {
+        var a = getElement(1);
+        var b = getElement(2);
+
+        $.ajax({
+            method: "POST",
+            url: "/BasicAlgorithms/RussianMultiplication?a=" + a + "&b=" + b,
+            success: function (results) {
+                $("#resultsContainer").html(results);
+            }
+        });
+    }
+
+    function getElement(number) {
+        return $("#element" + number).val();
+    }
+</script>
+
+<h2>Mnożenie po rosyjsku</h2>
+<h3>Idea</h3>
+<p>
+    Pomimo, iż mnożenie jest oczywistym działaniem, warto wiedzieć w jaki sposób można je zaimplementować
+    (np. dla własnego typu danych - arytmetyka dużych liczb).
+</p>
+<p>
+    Do poprawnego działania tego algorytmu na własnym typie danych należy zaimplementować:
+    <ul>
+        <li>sprawdzanie parzystości</li>
+        <li>mnożenie i dzielenie przez <span class="math">2</span> (przesunięcia bitowe)</li>
+        <li>dodawanie</li>
+    </ul>
+</p>
+<p>
+    Aby dowieść poprawności działania tego algorytmu, należy posłużycię się metodą niezmiennika pętli.
+    Niezmiennik jest następujący: <span class="math">A*B = result + a*b</span>, gdzie <span class="math">A, B</span>
+    to wartości wejściowe <span class="math">a, b</span>.
+</p>
+
+<h3>Kod źródłowy</h3>
+<pre>
+public virtual long RussianMultiplicate(long a, long b)
+{
+    long result = 0;
+    while(a > 0)
+    {
+        if (a.Odd())
+            result += b;
+        a = a >> 1;
+        b = b << 1;
+    }<br />
+    return result;
+}<br />
+public static bool Odd(this long number)
+{
+    return (number & 1) == 1;
+}
+</pre>
+
+<h3>Spróbuj!</h3>
+<div>
+    <p>Podaj liczby do mnożenia:</p>
+    <div class="form-group" style="margin-left: 0;">
+        <dl>
+            <dt>Liczba pierwsza</dt>
+            <dd>@Html.TextBox("element1", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element1" })</dd>
+
+            <dt>Liczba druga</dt>
+            <dd>@Html.TextBox("element2", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element2" })</dd>
+        </dl>
+
+    </div>
+    <button onclick="getResults()" class="btn btn-primary">Pomnoż</button>
+    <br /><br />
+    <div id="resultsContainer"></div>
+</div>
