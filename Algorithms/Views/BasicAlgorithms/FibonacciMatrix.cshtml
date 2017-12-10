@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Liczby Fibonacciego";
+}
+
+<script>
+    function getResults() {
+        var number = getElement();
+
+        $.ajax({
+            method: "POST",
+            url: "/BasicAlgorithms/FibonacciMatrix?number=" + number,
+            success: function (results) {
+                $("#resultsContainer").html(results);
+            }
+        });
+    }
+
+    function getElement() {
+        return $("#element").val();
+    }
+</script>
+
+<h2>Liczby Fibonacciego</h2>
+<h3>Idea</h3>
+<p>
+    Liczby Fibonacciego są wszędzie :-). Serdecznie zachęcam do zapoznania się z tematem na własną rękę.
+    Ja pokażę tylko jak je obliczać. Kolejna liczba Fibonacciego to suma dwóch poprzednich liczb tego ciągu.
+    Łatwo zatem obliczyć to rekurencyjnie: niestety jednak otrzymamy wtedy wykładniczą złożoność.
+    Możemy zastosować prostą pętlę i zejdziemy od złożoności liniowej. Ten algorytm jest zazwyczaj wystarczający.
+</p>
+<p>
+    Ja natomiast przedstawiam wersję działającą w złożoności logarytmicznej. Skorzystam z poniższej własności:<br />
+    <img src="../../Content/Images/fib_matrix.gif" alt="Zależność macierzowa dla ciągu Fibonacciego" /><br />
+    Musimy zatem policznyć <span class="math">n-1</span> potęgę podanej macierzy. Korzystając z
+    @Html.ActionLink("metody szybkiego potęgowania", "QuickExponentiation", "DivideAndConquer")
+    nie będziemy musieli wykonywać <span class="math">n-2</span>, tylko <span class="math">O(log(n))</span> mnożeń.
+</p>
+<p>
+    Ponieważ liczby Fibonacciego rosną bardzo szybko, przechowuję resty z dzielenia przez <span class="math">100</span> milionów.
+</p>
+<p>
+    @Html.ActionLink("Implementacja macierzy", "Index", "DataStructures")
+</p>
+
+<h3>Kod źródłowy</h3>
+<pre>
+public long FibonacciNumber(int n)
+{
+    if (n == 0)
+    {
+        return 0;
+    }
+
+    if (n == 1)
+    {
+        return 1;
+    }
+
+    var matrix = new Matrix(2, 2);
+    matrix[0, 0] = matrix[0, 1] = matrix[1, 0] = 1;
+    matrix[1, 1] = 0;
+
+    matrix = matrix ^ (n - 1);
+    return matrix[0, 0];
+}
+</pre>
+
+<h3>Spróbuj!</h3>
+<div>
+    <p>Podaj liczbę <span class="math">n</span>:</p>
+    <div class="form-group" style="margin-left: 0;">
+        @Html.TextBox("element1", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element" })
+    </div>
+    <button onclick="getResults()" class="btn btn-primary">Znajdź n-tą liczbę Fibonacciego</button>
+    <br /><br />
+    <div id="resultsContainer"></div>
+</div>

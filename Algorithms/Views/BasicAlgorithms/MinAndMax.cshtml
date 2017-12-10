@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Wyszukiwanie minimum i maksimum jednocześnie";
+}
+
+<script>
+    function getResults() {
+        $.ajax({
+            method: "POST",
+            url: "/BasicAlgorithms/MinAndMax?values=" + getInput(),
+            success: function (results) {
+                $("#resultsContainer").html(results);
+            }
+        });
+    }
+
+    function getInput() {
+        return $("#input").val();
+    }
+</script>
+
+<h2>Wyszukiwanie minimum i maksimum jednocześnie</h2>
+<h3>Idea</h3>
+<p>
+    Pierwsze rozwiązanie, które się nasuwa, to dwukrotne przejście przez tablicę z danymi.
+    Podczas pierwszego przebiegu szukamy minimum, podczas drugiego maksimum. Tym sposobem wykonamy
+    <span class="math">2 * (n - 1)</span> porównań. Wystarczy ich jednak wykonać <span class="math">3n/2 - 2</span>.
+    Skąd taka liczba? Możemy podzielić zbiór na 2 grupy: kandydaci na minimum i kandydaci ma maksimum. Zajmie to
+    <span class="math">n/2</span> porównań. Spośród tych podzbiorów wybieramy odpowiednio minimum i maksimum - zajmie to
+    <span class="math">2 * (n/2 - 1)</span> porównań.
+</p>
+<p>
+    Implementacja, którą przedstawiam poniżej prezentuje podejście @Html.ActionLink("dziel i zwyciężaj", "Index", "DivideAndConquer").
+    Rekurencyjnie będziemy dzielić zbiór na dwie połowy: jeśli dojdziemy do sytuacji, że zostaje 1 lub 2 elementy łatwo zwracamy parę (MIN, MAX).
+    Wyniki dla dwóch podzbiorów: (MIN_1, MAX_1), (MIN_2, MAX_2) łączymy w jeden przez 2 porównania: pierwsze to wybór mininim spośród MIN_1, MIN_2,
+    a drugie to analogiczny wybór maksimum.
+</p>
+
+<h3>Kod źródłowy</h3>
+<pre>
+public (T Min, T Max) MinAndMax&lt;T&gt;(T[] array) where T : IComparable
+{
+    return MinAndMax&lt;T&gt;(array, 0, array.Length - 1);
+}
+
+private (T Min, T Max) MinAndMax&lt;T&gt;(T[] array, int left, int right) where T : IComparable
+{
+    if (left == right)
+    {
+        return (Min: array[left], Max: array[left]);
+    }
+
+    if (right - left == 1)
+    {
+        return SortTwoItems(array[left], array[right]);
+    }
+
+    var mid = (left + right) / 2;
+    var leftResult = MinAndMax(array, left, mid);
+    var rightResult = MinAndMax(array, mid + 1, right);
+
+    return (Min: Min(leftResult.Item1, rightResult.Item1),
+            Max: Max(leftResult.Item2, rightResult.Item2));
+}
+
+private (T Min, T Max) SortTwoItems&lt;T&gt;(T first, T other) where T : IComparable
+{
+    return first.CompareTo(other) &lt;= 0
+        ? (Min: first, Max: other)
+        : (Min: other, Max: first);
+}
+
+private T Min&lt;T&gt;(T first, T other) where T : IComparable
+{
+    return first.CompareTo(other) &lt;= 0 ? first : other;
+}
+
+private T Max&lt;T&gt;(T first, T other) where T : IComparable
+{
+    return first.CompareTo(other) &gt;= 0 ? first : other;
+}
+</pre>
+
+<h3>Spróbuj!</h3>
+<div>
+    <p>Podaj liczby rozdzielone spacjami:</p>
+    <div class="form-group" style="margin-left: 0;">
+        @Html.TextBox("input", "", htmlAttributes: new { placeholder = "5 12 1 8 3 9 7", @class = "form-control", id = "input" })
+    </div>
+    <button onclick="getResults()" class="btn btn-primary">Znajdź minimum i maksimum</button>
+    <br /><br />
+    <div id="resultsContainer"></div>
+</div>

@@ -11,13 +11,17 @@ namespace Implementations.DataStructures
         public List(IEnumerable<T> collection)
         {
             if (!collection.Empty())
+            {
                 ConvertCollectionToList(collection);
+            }
         }
 
         private void ConvertCollectionToList(IEnumerable<T> collection)
         {
             foreach (var item in collection)
+            {
                 AddLast(item);
+            }
         }
 
         public IEnumerable<T> ToEnumerable()
@@ -71,10 +75,14 @@ namespace Implementations.DataStructures
         public void AddAfter(ListNode<T> node, T item)
         {
             if (node == null)
+            {
                 throw new ArgumentException("Nodes cannot be null.");
+            }
 
             if (Last.Equals(node))
+            {
                 AddLast(item);
+            }
             else
             {
                 var newNode = new ListNode<T>(item, this);
@@ -90,10 +98,14 @@ namespace Implementations.DataStructures
         public void AddBefore(ListNode<T> node, T item)
         {
             if (node == null)
+            {
                 throw new ArgumentException("Nodes cannot be null.");
+            }
 
             if (First.Equals(node))
+            {
                 AddFirst(item);
+            }
             else
             {
                 var newNode = new ListNode<T>(item, this);
@@ -109,14 +121,18 @@ namespace Implementations.DataStructures
         public void Clear()
         {
             while (Count != 0)
+            {
                 RemoveLast();
+            }
         }
 
         public bool Remove(T item)
         {
             var node = Find(item);
             if (node == null)
+            {
                 return false;
+            }
 
             Remove(node);
             return true;
@@ -125,35 +141,61 @@ namespace Implementations.DataStructures
         public void Remove(ListNode<T> node)
         {
             if (node == null)
+            {
                 throw new ArgumentException("Node to delete cannot be null.");
+            }
+
             if (!this.Equals(node.List))
+            {
                 throw new ArgumentException("Node to delete must be from the list, on which operation was invoked.");
+            }
+
             if (First.Equals(node))
+            {
                 RemoveFirst();
+            }
             else if (Last.Equals(node))
+            {
                 RemoveLast();
+            }
             else
+            {
                 RemoveElement(node);
+            }
         }
 
         public void RemoveFirst()
         {
             if (Count == 0)
+            {
                 throw new InvalidOperationException();
+            }
+
             if (Count == 1)
+            {
                 RemoveOnlyElement();
+            }
             else
+            {
                 RemoveFirstElement();
+            }
         }
 
         public void RemoveLast()
         {
             if (Count == 0)
+            {
                 throw new InvalidOperationException();
+            }
+
             if (Count == 1)
+            {
                 RemoveOnlyElement();
+            }
             else
+            {
                 RemoveLastElement();
+            }
         }
 
         private void RemoveElement(ListNode<T> node)
@@ -194,9 +236,13 @@ namespace Implementations.DataStructures
             while (current != null)
             {
                 if (current.Value.Equals(item))
+                {
                     break;
+                }
+
                 current = current.Next;
             }
+
             return current;
         }
     }

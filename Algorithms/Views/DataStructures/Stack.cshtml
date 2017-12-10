@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Stos";
+}
+
+<h2>Stos</h2>
+<p>
+    Stos to kolekcja danych w porządku LIFO (Last In First Out).
+    Jeśli sobie ją wyobrazimy: to co ostatnio położyliśmy na górę, zdejmniemy najpierw.
+    Nie ma możliwości włożenia czegoś do środka lub na spód, stos mógłby się przewrócić :-)
+</p>
+<p>
+    Do implementacji wykorzystałem zaimplementowaną wcześniej @Html.ActionLink("listę dwukierunkową", "List"),
+    opakowaując ją i wystawiąjąc odpowiednie metody.
+</p>
+<h3>Kod źródłowy</h3>
+<pre>
+public class Stack&lt;T&gt;
+{
+    private List&lt;T&gt; _data;
+
+    public Stack()
+    {
+        _data = new List&lt;T&gt;();
+    }
+
+    public int Count =&gt; _data.Count;
+
+    public void Push(T item)
+    {
+        _data.AddFirst(item);
+    }
+
+    public T Pop()
+    {
+        var result = _data.First;
+        _data.RemoveFirst();
+        return result.Value;
+    }
+
+    public void Clear()
+    {
+        _data.Clear();
+    }
+}
+</pre>

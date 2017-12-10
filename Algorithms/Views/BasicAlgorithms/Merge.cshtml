@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Łączenie uporządkowancych ciągów";
+}
+
+<script>
+    function getResults() {
+        var array1 = getArray(1);
+        var array2 = getArray(2);
+        $.ajax({
+            method: "POST",
+            url: "/BasicAlgorithms/Merge?first=" + array1 + "&second=" + array2,
+            success: function (results) {
+                $("#resultsContainer").html(results);
+            }
+        });
+    }
+
+    function getArray(arrayNo) {
+        return $("#array" + arrayNo).val();
+    }
+</script>
+
+<h2>Łączenie uporządkowancych ciągów</h2>
+<h3>Idea</h3>
+<p>
+    Chcemy połączyć dwa uporządkowane ciągi. Teoretycznie, moglibyśmy połączyć je w jeden i skorzystać
+    z jedngo z @Html.ActionLink("algorytmów sortowania", "Index", "SortingAlgorithms"). Złożoność jaką wtedy
+    otrzymamy, będzie uzależniona od algorytmu sortowania, czyli <span class="math">O(n * log(n))</span>
+    lub nawet <span class="math">O(n<sup>2</sup>)</span>. Poniżej przestawię rozwiązanie działające w czasie liniowym.
+</p>
+<p>
+    Skoro oba ciągi są uporządkowane, to wystarczy pobierać pierwszy element z pierwszego lub drugiego ciągu, wybierając mniejszy.
+    Kosztuje nas to jedno porównanie. Możemy sobie wyobrazić, że element ten usuwanmy (naprawdę będziemy tylko przesuwać wskaźnik).
+    Robimy tak dopóki, dopóty nie opróżnimy jednego z ciągów. Ostatecznie wystarczy dołączyć pozostałe elementy w niezmienionej kolejności.
+</p>
+<p>
+    Ten bardzo prosty algorytm, przyda nam się przy implementacji @Html.ActionLink("sorotwnia przez scalanie", "MergeSort", "SortAlgorithms").
+</p>
+
+<h3>Kod źródłowy</h3>
+<pre>
+public IEnumerable&lt;T&gt; Merge&lt;T&gt;(T[] array1, T[] array2) where T : IComparable
+{
+    var index1 = 0;
+    var index2 = 0;
+    while (index1 &lt; array1.Length && index2 &lt; array2.Length)
+    {
+        if (array1[index1].CompareTo(array2[index2]) &lt;= 0)
+        {
+            yield return array1[index1++];
+        }
+        else
+        {
+            yield return array2[index2++];
+        }
+    }
+
+    while (index1 &lt; array1.Length)
+    {
+        yield return array1[index1++];
+    }
+
+    while (index2 &lt; array2.Length)
+    {
+        yield return array2[index2++];
+    }
+}
+</pre>
+
+<h3>Spróbuj!</h3>
+<div>
+    <p>Podaj liczby rozdzielone spacjami:</p>
+    <div class="form-group" style="margin-left: 0;">
+        <dl>
+            <dt>Ciąg pierwszy</dt>
+            <dd>@Html.TextBox("array1", "", htmlAttributes: new { placeholder = "1 3 5 7 8 9", @class = "form-control", id = "array1" })</dd>
+
+            <dt>Ciąg drugi</dt>
+            <dd>@Html.TextBox("array2", "", htmlAttributes: new { placeholder = "1 3 5 7 8 9", @class = "form-control", id = "array2" })</dd>
+        </dl>
+    </div>
+    <button onclick="getResults()" class="btn btn-primary">Połącz</button>
+    <br /><br />
+    <div id="resultsContainer"></div>
+</div>

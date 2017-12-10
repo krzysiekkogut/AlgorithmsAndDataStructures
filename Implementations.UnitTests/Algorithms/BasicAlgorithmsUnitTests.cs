@@ -35,7 +35,7 @@ namespace Implementations.Algorithms.UnitTests
         {
             var result = _basicAlgorithms.MinAndMax(new int[] { 1 });
 
-            Assert.AreEqual(new Tuple<int, int>(1, 1), result);
+            Assert.AreEqual((Min: 1, Max: 1), result);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Implementations.Algorithms.UnitTests
         {
             var result = _basicAlgorithms.MinAndMax(new int[] { 1, 10, -19, 7, 3 });
 
-            Assert.AreEqual(new Tuple<int, int>(-19, 10), result);
+            Assert.AreEqual((Min: -19, Max: 10), result);
         }
 
         [TestMethod]

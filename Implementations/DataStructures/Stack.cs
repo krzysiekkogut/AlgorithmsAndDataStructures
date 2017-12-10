@@ -9,7 +9,7 @@
             _data = new List<T>();
         }
 
-        public int Count { get { return _data.Count; } }
+        public int Count => _data.Count;
 
         public void Push(T item)
         {
