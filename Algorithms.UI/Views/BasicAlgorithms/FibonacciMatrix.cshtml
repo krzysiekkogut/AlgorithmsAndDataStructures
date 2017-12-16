@@ -43,27 +43,7 @@
 </p>
 
 <h3>Kod źródłowy</h3>
-<pre>
-public long FibonacciNumber(int n)
-{
-    if (n == 0)
-    {
-        return 0;
-    }
-
-    if (n == 1)
-    {
-        return 1;
-    }
-
-    var matrix = new Matrix(2, 2);
-    matrix[0, 0] = matrix[0, 1] = matrix[1, 0] = 1;
-    matrix[1, 1] = 0;
-
-    matrix = matrix ^ (n - 1);
-    return matrix[0, 0];
-}
-</pre>
+<script src="https://gist.github.com/krzysiekkogut/9cbd8c0fcb273c2d93d3efd162c2def1.js"></script>
 
 <h3>Spróbuj!</h3>
 <div>

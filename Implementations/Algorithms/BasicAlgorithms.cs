@@ -42,8 +42,8 @@ namespace Implementations.Algorithms
             var leftResult = MinAndMax(array, left, mid);
             var rightResult = MinAndMax(array, mid + 1, right);
 
-            return (Min: Min(leftResult.Item1, rightResult.Item1),
-                    Max: Max(leftResult.Item2, rightResult.Item2));
+            return (Min: Min(leftResult.Min, rightResult.Min),
+                    Max: Max(leftResult.Max, rightResult.Max));
         }
 
         private (T Min, T Max) SortTwoItems<T>(T first, T other) where T : IComparable

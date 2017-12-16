@@ -8,13 +8,11 @@ namespace Implementations.DataStructures
         private int RowsCount { get; set; }
         private int ColumnsCount { get; set; }
 
-        private static int mod = 100000000;
+        private static int mod = 100_000_000;
 
         private long[,] matrixData;
 
-        public Matrix()
-            : this(1, 1)
-        { }
+        public Matrix() : this(1, 1) { }
 
         public Matrix(int rows, int columns)
         {
@@ -26,8 +24,8 @@ namespace Implementations.DataStructures
 
         public long this[int row, int column]
         {
-            get { return matrixData[row, column]; }
-            set { matrixData[row, column] = value % mod; }
+            get => matrixData[row, column];
+            set => matrixData[row, column] = value % mod;
         }
 
         public static Matrix operator +(Matrix a, Matrix b)

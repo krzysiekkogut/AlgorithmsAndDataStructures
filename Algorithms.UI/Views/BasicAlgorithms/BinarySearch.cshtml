@@ -48,34 +48,7 @@
 </p>
 
 <h3>Kod źródłowy</h3>
-<pre>
-public int BinarySearch&lt;T&gt;(T[] input, T element) where T : IComparable
-{
-    var left = 0;
-    var right = input.Length - 1;
-
-    while (left &lt;= right)
-    {
-        var mid = (left + right) / 2;
-
-        if (element.Equals(input[mid]))
-        {
-            return mid;
-        }
-
-        if (element.CompareTo(input[mid]) &lt; 0)
-        {
-            right = mid - 1;
-        }
-        else
-        {
-            left = mid + 1;
-        }
-    }
-
-    return -1;
-}
-</pre>
+<script src="https://gist.github.com/krzysiekkogut/1cfd62ed31e026549837086363a14143.js"></script>
 
 <h3>Spróbuj!</h3>
 <div>

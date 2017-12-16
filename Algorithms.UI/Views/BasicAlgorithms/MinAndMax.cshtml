@@ -36,49 +36,7 @@
 </p>
 
 <h3>Kod źródłowy</h3>
-<pre>
-public (T Min, T Max) MinAndMax&lt;T&gt;(T[] array) where T : IComparable
-{
-    return MinAndMax&lt;T&gt;(array, 0, array.Length - 1);
-}
-
-private (T Min, T Max) MinAndMax&lt;T&gt;(T[] array, int left, int right) where T : IComparable
-{
-    if (left == right)
-    {
-        return (Min: array[left], Max: array[left]);
-    }
-
-    if (right - left == 1)
-    {
-        return SortTwoItems(array[left], array[right]);
-    }
-
-    var mid = (left + right) / 2;
-    var leftResult = MinAndMax(array, left, mid);
-    var rightResult = MinAndMax(array, mid + 1, right);
-
-    return (Min: Min(leftResult.Item1, rightResult.Item1),
-            Max: Max(leftResult.Item2, rightResult.Item2));
-}
-
-private (T Min, T Max) SortTwoItems&lt;T&gt;(T first, T other) where T : IComparable
-{
-    return first.CompareTo(other) &lt;= 0
-        ? (Min: first, Max: other)
-        : (Min: other, Max: first);
-}
-
-private T Min&lt;T&gt;(T first, T other) where T : IComparable
-{
-    return first.CompareTo(other) &lt;= 0 ? first : other;
-}
-
-private T Max&lt;T&gt;(T first, T other) where T : IComparable
-{
-    return first.CompareTo(other) &gt;= 0 ? first : other;
-}
-</pre>
+<script src="https://gist.github.com/krzysiekkogut/65a875c1d8ea61aa9a1d2902266e6cc1.js"></script>
 
 <h3>Spróbuj!</h3>
 <div>

@@ -38,34 +38,7 @@
 </p>
 
 <h3>Kod źródłowy</h3>
-<pre>
-public IEnumerable&lt;T&gt; Merge&lt;T&gt;(T[] array1, T[] array2) where T : IComparable
-{
-    var index1 = 0;
-    var index2 = 0;
-    while (index1 &lt; array1.Length && index2 &lt; array2.Length)
-    {
-        if (array1[index1].CompareTo(array2[index2]) &lt;= 0)
-        {
-            yield return array1[index1++];
-        }
-        else
-        {
-            yield return array2[index2++];
-        }
-    }
-
-    while (index1 &lt; array1.Length)
-    {
-        yield return array1[index1++];
-    }
-
-    while (index2 &lt; array2.Length)
-    {
-        yield return array2[index2++];
-    }
-}
-</pre>
+<script src="https://gist.github.com/krzysiekkogut/747d46595cd118f2aa9f9cf5cb7a97ad.js"></script>
 
 <h3>Spróbuj!</h3>
 <div>
