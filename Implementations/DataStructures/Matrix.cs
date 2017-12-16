@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Implementations.Helpers;
 
 namespace Implementations.DataStructures
@@ -144,6 +145,21 @@ namespace Implementations.DataStructures
             }
 
             return true;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 2055208815;
+
+            for (int i = 0; i < RowsCount; i++)
+            {
+                for (int j = 0; j < ColumnsCount; j++)
+                {
+                    hashCode = hashCode * -1521134295 + matrixData[i, j].GetHashCode();
+                }
+            }
+
+            return hashCode;
         }
     }
 }
