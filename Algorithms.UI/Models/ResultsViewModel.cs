@@ -1,4 +1,4 @@
-﻿namespace Algorithms.Models
+﻿namespace Algorithms.UI.Models
 {
     public class ResultsViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Algorithms
+namespace Algorithms.UI
 {
     public class BundleConfig
     {

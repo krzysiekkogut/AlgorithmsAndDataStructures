@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Algorithms.Controllers
+namespace Algorithms.UI.Controllers
 {
     public class DataStructuresController : Controller
     {

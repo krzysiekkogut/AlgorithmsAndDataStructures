@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Algorithms
+namespace Algorithms.UI
 {
     public class FilterConfig
     {

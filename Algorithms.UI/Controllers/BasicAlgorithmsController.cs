@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Algorithms.Models;
+using Algorithms.UI.Models;
 using Implementations.Algorithms;
 
-namespace Algorithms.Controllers
+namespace Algorithms.UI.Controllers
 {
     public class BasicAlgorithmsController : Controller
     {
