@@ -20,38 +20,54 @@
     }
 </script>
 
-<h2>Liczby Fibonacciego</h2>
-<h3>Idea</h3>
-<p>
-    Liczby Fibonacciego są wszędzie :-). Serdecznie zachęcam do zapoznania się z tematem na własną rękę.
-    Ja pokażę tylko jak je obliczać. Kolejna liczba Fibonacciego to suma dwóch poprzednich liczb tego ciągu.
-    Łatwo zatem obliczyć to rekurencyjnie: niestety jednak otrzymamy wtedy wykładniczą złożoność.
-    Możemy zastosować prostą pętlę i zejdziemy od złożoności liniowej. Ten algorytm jest zazwyczaj wystarczający.
-</p>
-<p>
-    Ja natomiast przedstawiam wersję działającą w złożoności logarytmicznej. Skorzystam z poniższej własności:<br />
-    <img src="../../Content/Images/fib_matrix.gif" alt="Zależność macierzowa dla ciągu Fibonacciego" /><br />
-    Musimy zatem policznyć <span class="math">n-1</span> potęgę podanej macierzy. Korzystając z
-    @Html.ActionLink("metody szybkiego potęgowania", "QuickExponentiation", "DivideAndConquer")
-    nie będziemy musieli wykonywać <span class="math">n-2</span>, tylko <span class="math">O(log(n))</span> mnożeń.
-</p>
-<p>
-    Ponieważ liczby Fibonacciego rosną bardzo szybko, przechowuję resty z dzielenia przez <span class="math">100</span> milionów.
-</p>
-<p>
-    @Html.ActionLink("Implementacja macierzy", "Index", "DataStructures")
-</p>
-
-<h3>Kod źródłowy</h3>
-<script src="https://gist.github.com/krzysiekkogut/9cbd8c0fcb273c2d93d3efd162c2def1.js"></script>
-
-<h3>Spróbuj!</h3>
-<div>
-    <p>Podaj liczbę <span class="math">n</span>:</p>
-    <div class="form-group" style="margin-left: 0;">
-        @Html.TextBox("element1", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element" })
-    </div>
-    <button onclick="getResults()" class="btn btn-primary">Znajdź n-tą liczbę Fibonacciego</button>
-    <br /><br />
-    <div id="resultsContainer"></div>
-</div>
+<header>
+    <hgroup>
+        <h1>Liczby Fibonacciego</h1>
+        <h2>Idea</h2>
+    </hgroup>
+</header>
+<article>
+    <section>
+        <p>
+            Liczby Fibonacciego są wszędzie :-). Serdecznie zachęcam do zapoznania się z tematem na własną rękę.
+            Ja pokażę tylko jak je obliczać. Kolejna liczba Fibonacciego to suma dwóch poprzednich liczb tego ciągu.
+            Łatwo zatem obliczyć to rekurencyjnie: niestety jednak otrzymamy wtedy wykładniczą złożoność.
+            Możemy zastosować prostą pętlę i zejdziemy od złożoności liniowej. Ten algorytm jest zazwyczaj wystarczający.
+        </p>
+        <p>
+            Ja natomiast przedstawiam wersję działającą w złożoności logarytmicznej. Skorzystam z poniższej własności:<br />
+            <img src="../../Content/Images/fib_matrix.gif" alt="Zależność macierzowa dla ciągu Fibonacciego" /><br />
+            Musimy zatem policznyć <span class="math">n-1</span> potęgę podanej macierzy. Korzystając z
+            @Html.ActionLink("metody szybkiego potęgowania", "QuickExponentiation", "DivideAndConquer")
+            nie będziemy musieli wykonywać <span class="math">n-2</span>, tylko <span class="math">O(log(n))</span> mnożeń.
+        </p>
+        <p>
+            Ponieważ liczby Fibonacciego rosną bardzo szybko, przechowuję resty z dzielenia przez <span class="math">100</span> milionów.
+        </p>
+    </section>
+    <aside>
+        <p>
+            @Html.ActionLink("Implementacja macierzy", "Index", "DataStructures")
+        </p>
+    </aside>
+    <section>
+        <header>
+            <h1>Kod źródłowy</h1>
+        </header>
+        <script src="https://gist.github.com/krzysiekkogut/9cbd8c0fcb273c2d93d3efd162c2def1.js"></script>
+    </section>
+    <section>
+        <header>
+            <h1>Spróbuj!</h1>
+        </header>
+        <div>
+            <p>Podaj liczbę <span class="math">n</span>:</p>
+            <div class="form-group" style="margin-left: 0;">
+                @Html.TextBox("element1", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element" })
+            </div>
+            <button onclick="getResults()" class="btn btn-primary">Znajdź n-tą liczbę Fibonacciego</button>
+            <br /><br />
+            <div id="resultsContainer"></div>
+        </div>
+    </section>
+</article>

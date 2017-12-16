@@ -21,34 +21,46 @@
     }
 </script>
 
-<h2>Największy wspólny dzielnik (algorytm Euklidesa)</h2>
-<h3>Idea</h3>
-<p>
-    Algorytm z cyklu "Każdy musi go znać". Jest to jednen z pierwszych algotyrmów jaki poznałem. Pewnie dlatego,
-    że jego przeznaczenie jest oczywiste, można go zapisać w wersji z odejmowaniem lub z modulo (reszta z dzielenia),
-    iteracyjnie lub rekurencyjnie.
-</p>
-<p>
-    Ja przedstawiam wersję działającą iteracyjnie i korzystającą z działania modulo.
-</p>
+<article>
+    <header>
+        <hgroup>
+            <h1>Największy wspólny dzielnik (algorytm Euklidesa)</h1>
+            <h2>Idea</h2>
+        </hgroup>
+    </header>
+    <section>
+        <p>
+            Algorytm z cyklu "Każdy musi go znać". Jest to jednen z pierwszych algotyrmów jaki poznałem. Pewnie dlatego,
+            że jego przeznaczenie jest oczywiste, można go zapisać w wersji z odejmowaniem lub z modulo (reszta z dzielenia),
+            iteracyjnie lub rekurencyjnie.
+        </p>
+        <p>
+            Ja przedstawiam wersję działającą iteracyjnie i korzystającą z działania modulo.
+        </p>
+    </section>
+    <section>
+        <h1>Kod źródłowy</h1>
+        <script src="https://gist.github.com/krzysiekkogut/6ae7442f5b5670e28f7f0585ef7c1327.js"></script>
+    </section>
+    <section>
+        <header>
+            <h1>Spróbuj!</h1>
+        </header>
+        <div>
+            <p>Podaj dwie liczby:</p>
+            <div class="form-group" style="margin-left: 0;">
+                <dl>
+                    <dt>Liczba pierwsza</dt>
+                    <dd>@Html.TextBox("element1", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element1" })</dd>
 
-<h3>Kod źródłowy</h3>
-<script src="https://gist.github.com/krzysiekkogut/6ae7442f5b5670e28f7f0585ef7c1327.js"></script>
+                    <dt>Liczba druga</dt>
+                    <dd>@Html.TextBox("element2", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element2" })</dd>
+                </dl>
 
-<h3>Spróbuj!</h3>
-<div>
-    <p>Podaj dwie liczby:</p>
-    <div class="form-group" style="margin-left: 0;">
-        <dl>
-            <dt>Liczba pierwsza</dt>
-            <dd>@Html.TextBox("element1", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element1" })</dd>
-
-            <dt>Liczba druga</dt>
-            <dd>@Html.TextBox("element2", "", htmlAttributes: new { placeholder = "9", @class = "form-control", id = "element2" })</dd>
-        </dl>
-
-    </div>
-    <button onclick="getResults()" class="btn btn-primary">Pomnoż</button>
-    <br /><br />
-    <div id="resultsContainer"></div>
-</div>
+            </div>
+            <button onclick="getResults()" class="btn btn-primary">Pomnoż</button>
+            <br /><br />
+            <div id="resultsContainer"></div>
+        </div>
+    </section>
+</article>

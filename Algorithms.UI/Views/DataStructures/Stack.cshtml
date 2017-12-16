@@ -2,15 +2,25 @@
     ViewBag.Title = "Stos";
 }
 
-<h2>Stos</h2>
-<p>
-    Stos to kolekcja danych w porządku LIFO (Last In First Out).
-    Jeśli sobie ją wyobrazimy: to co ostatnio położyliśmy na górę, zdejmniemy najpierw.
-    Nie ma możliwości włożenia czegoś do środka lub na spód, stos mógłby się przewrócić :-)
-</p>
-<p>
-    Do implementacji wykorzystałem zaimplementowaną wcześniej @Html.ActionLink("listę dwukierunkową", "List"),
-    opakowaując ją i wystawiąjąc odpowiednie metody.
-</p>
-<h3>Kod źródłowy</h3>
-<script src="https://gist.github.com/krzysiekkogut/bfb7ff8824603f4be23ef4523941ff33.js"></script>
+<article>
+    <header>
+        <h1>Stos</h1>
+    </header>
+    <section>
+        <p>
+            Stos to kolekcja danych w porządku LIFO (Last In First Out).
+            Jeśli sobie ją wyobrazimy: to co ostatnio położyliśmy na górę, zdejmniemy najpierw.
+            Nie ma możliwości włożenia czegoś do środka lub na spód, stos mógłby się przewrócić :-)
+        </p>
+        <p>
+            Do implementacji wykorzystałem zaimplementowaną wcześniej @Html.ActionLink("listę dwukierunkową", "List"),
+            opakowaując ją i wystawiąjąc odpowiednie metody.
+        </p>
+    </section>
+    <section>
+        <header>
+            <h1>Kod źródłowy</h1>
+        </header>
+        <script src="https://gist.github.com/krzysiekkogut/bfb7ff8824603f4be23ef4523941ff33.js"></script>
+    </section>
+</article>

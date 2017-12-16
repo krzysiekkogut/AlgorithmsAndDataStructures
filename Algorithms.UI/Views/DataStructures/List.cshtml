@@ -2,44 +2,54 @@
     ViewBag.Title = "Lista";
 }
 
-<h2>Lista</h2>
-<p>
-    Poniżej przedstawiam implementację listy dwukierunkowej. Lista taka oferuje operacje wstawiania i usuwania w czasie stałym.
-    Aby dostać się do elementów potrzebna jest jednak liniowa względem długości listy ilość operacji. Jest to specyfika tej struktury:
-    pamiętamy jedynie wskaźnik na początek i koniec, kolejne węzły wskazują na swojego poprzednika i następcę.
-</p>
-<p>
-    <i>
-        Operacje wstawiania i usuwania są wykonywane w czasie stałym zawsze, jeśli robimy to na początku lub końcu listy.
-        Jeśli chcemy wstawić lub usunąć element ze środka listy, musimy znać węzeł sąsiedni w przypadku wstawiania,
-        lub węzeł który chcemy usunąć. Jeśli nie znamy tego węzła, będziemy musieli wykonać dodatkowo kosztowne wyszukiwanie.
-    </i>
-</p>
-<p>
-    Lista dwukierunkowa może być użyta jako @Html.ActionLink("stos", "Stack") lub @Html.ActionLink("kolejka", "Queue"),
-    w zależności jakie operacje udostępnimy.
-</p>
-<p>
-    Na liście dwukierunkowej, której implementacja jest poniżej można na niej wykonać poniższe operacje:
-    <ul>
-        <li>Inicjalizacja jako pusta lista.</li>
-        <li>Inicjalizacja elementami innej kolekcji.</li>
-        <li>Skonwertowanie listy na kolekcję typu IEnumerable.</li>
-        <li>Pobranie ilości elementów.</li>
-        <li>Pobranie pierwszego elementu.</li>
-        <li>Pobranie ostatniego elementu.</li>
-        <li>Dodanie elementu na pierwszą pozycję.</li>
-        <li>Dodanie elementu na ostatnią pozycję.</li>
-        <li>Dodanie elementu przed danym węzłem.</li>
-        <li>Dodanie elementu po danym węźle.</li>
-        <li>Wyczyszczenie listy.</li>
-        <li>Usunięcie elementu (jego pierwszego wystąpienia).</li>
-        <li>Usunięcie węzła.</li>
-        <li>Usunięcie pierwszego elementu.</li>
-        <li>Usunięcie ostatniego elementu.</li>
-        <li>Sprawdzenie czy lista zawiera dany element.</li>
-        <li>Pobranie węzłą o podanej wartości.</li>
-    </ul>
-</p>
-<h3>Kod źródłowy</h3>
-<script src="https://gist.github.com/krzysiekkogut/9844e69515a0f3e8adefcdf43396d3a8.js"></script>
+<article>
+    <header>
+        <h1>Lista</h1>
+    </header>
+    <section>
+        <p>
+            Poniżej przedstawiam implementację listy dwukierunkowej. Lista taka oferuje operacje wstawiania i usuwania w czasie stałym.
+            Aby dostać się do elementów potrzebna jest jednak liniowa względem długości listy ilość operacji. Jest to specyfika tej struktury:
+            pamiętamy jedynie wskaźnik na początek i koniec, kolejne węzły wskazują na swojego poprzednika i następcę.
+        </p>
+        <p>
+            <i>
+                Operacje wstawiania i usuwania są wykonywane w czasie stałym zawsze, jeśli robimy to na początku lub końcu listy.
+                Jeśli chcemy wstawić lub usunąć element ze środka listy, musimy znać węzeł sąsiedni w przypadku wstawiania,
+                lub węzeł który chcemy usunąć. Jeśli nie znamy tego węzła, będziemy musieli wykonać dodatkowo kosztowne wyszukiwanie.
+            </i>
+        </p>
+        <p>
+            Lista dwukierunkowa może być użyta jako @Html.ActionLink("stos", "Stack") lub @Html.ActionLink("kolejka", "Queue"),
+            w zależności jakie operacje udostępnimy.
+        </p>
+        <p>
+            Na liście dwukierunkowej, której implementacja jest poniżej można na niej wykonać poniższe operacje:
+            <ul>
+                <li>Inicjalizacja jako pusta lista.</li>
+                <li>Inicjalizacja elementami innej kolekcji.</li>
+                <li>Skonwertowanie listy na kolekcję typu IEnumerable.</li>
+                <li>Pobranie ilości elementów.</li>
+                <li>Pobranie pierwszego elementu.</li>
+                <li>Pobranie ostatniego elementu.</li>
+                <li>Dodanie elementu na pierwszą pozycję.</li>
+                <li>Dodanie elementu na ostatnią pozycję.</li>
+                <li>Dodanie elementu przed danym węzłem.</li>
+                <li>Dodanie elementu po danym węźle.</li>
+                <li>Wyczyszczenie listy.</li>
+                <li>Usunięcie elementu (jego pierwszego wystąpienia).</li>
+                <li>Usunięcie węzła.</li>
+                <li>Usunięcie pierwszego elementu.</li>
+                <li>Usunięcie ostatniego elementu.</li>
+                <li>Sprawdzenie czy lista zawiera dany element.</li>
+                <li>Pobranie węzłą o podanej wartości.</li>
+            </ul>
+        </p>
+    </section>
+    <section>
+        <header>
+            <h1>Kod źródłowy</h1>
+        </header>
+        <script src="https://gist.github.com/krzysiekkogut/9844e69515a0f3e8adefcdf43396d3a8.js"></script>
+    </section>
+</article>

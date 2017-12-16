@@ -31,36 +31,50 @@
     }
 </script>
 
-<h2>Wyszukiwanie binarne</h2>
-<h3>Idea</h3>
-<p>
-    Dość często mamy do czynienia z uporządkowanymi danymi. Przeszukiwanie ich po kolei,
-    już na pierwszy rzut oka wydaje się niepotrzebne. Poniżej pokażę algorytm, który dla tablicy
-    o długości <span class="math">1 000 000</span> wykona w pesymistycznym przypadku nie milion,
-    a dwadzieścia porównań!
-</p>
-<p>
-    Algorytm działa w czasie logarytmicznym. Schemat jego działania jest bardzo prosty: sprawdzamy
-    środkowy element kolekcji. Jeśli trafiliśmy, kończymy działanie. Jeśli szukany element jest mniejszy
-    od środkowego elementu kolekcji, zawężamy poszukiwanie do lewej części tablicy. Jeśli jest większy,
-    zaglądamy do prawej części. Postępujemy tak dopóki, dopóty nie znajdziemy szukanego elementu, lub jeśli nie
-    będziemy mogli już bardziej zawężyć obszaru poszukiwań.
-</p>
-
-<h3>Kod źródłowy</h3>
-<script src="https://gist.github.com/krzysiekkogut/1cfd62ed31e026549837086363a14143.js"></script>
-
-<h3>Spróbuj!</h3>
-<div>
-    <p>Podaj liczby rozdzielone spacjami:</p>
-    <div class="form-group" style="margin-left: 0;">
-        @Html.TextBox("array", "", htmlAttributes: new { placeholder = "1 3 5 7 8 9", @class = "form-control", id = "array" })
-    </div>
-    <p>Podaj element do wyszukania:</p>
-    <div class="form-group" style="margin-left: 0;">
-        @Html.TextBox("element", "", htmlAttributes: new { placeholder = "7", @class = "form-control", id = "element" })
-    </div>
-    <button onclick="getResults()" class="btn btn-primary">Znajdź</button>
-    <br /><br />
-    <div id="resultsContainer"></div>
-</div>
+<header>
+    <hgroup>
+        <h1>Wyszukiwanie binarne</h1>
+        <h2>Idea</h2>
+    </hgroup>
+</header>
+<article>
+    <section>
+        <p>
+            Dość często mamy do czynienia z uporządkowanymi danymi. Przeszukiwanie ich po kolei,
+            już na pierwszy rzut oka wydaje się niepotrzebne. Poniżej pokażę algorytm, który dla tablicy
+            o długości <span class="math">1 000 000</span> wykona w pesymistycznym przypadku nie milion,
+            a dwadzieścia porównań!
+        </p>
+        <p>
+            Algorytm działa w czasie logarytmicznym. Schemat jego działania jest bardzo prosty: sprawdzamy
+            środkowy element kolekcji. Jeśli trafiliśmy, kończymy działanie. Jeśli szukany element jest mniejszy
+            od środkowego elementu kolekcji, zawężamy poszukiwanie do lewej części tablicy. Jeśli jest większy,
+            zaglądamy do prawej części. Postępujemy tak dopóki, dopóty nie znajdziemy szukanego elementu, lub jeśli nie
+            będziemy mogli już bardziej zawężyć obszaru poszukiwań.
+        </p>
+    </section>
+    <section>
+        <header>
+            <h1>Kod źródłowy</h1>
+        </header>
+        <script src="https://gist.github.com/krzysiekkogut/1cfd62ed31e026549837086363a14143.js"></script>
+    </section>
+    <section>
+        <header>
+            <h1>Spróbuj!</h1>
+        </header>
+        <div>
+            <p>Podaj liczby rozdzielone spacjami:</p>
+            <div class="form-group" style="margin-left: 0;">
+                @Html.TextBox("array", "", htmlAttributes: new { placeholder = "1 3 5 7 8 9", @class = "form-control", id = "array" })
+            </div>
+            <p>Podaj element do wyszukania:</p>
+            <div class="form-group" style="margin-left: 0;">
+                @Html.TextBox("element", "", htmlAttributes: new { placeholder = "7", @class = "form-control", id = "element" })
+            </div>
+            <button onclick="getResults()" class="btn btn-primary">Znajdź</button>
+            <br /><br />
+            <div id="resultsContainer"></div>
+        </div>
+    </section>
+</article>

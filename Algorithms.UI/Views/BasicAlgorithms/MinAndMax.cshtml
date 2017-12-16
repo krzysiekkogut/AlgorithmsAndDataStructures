@@ -18,33 +18,47 @@
     }
 </script>
 
-<h2>Wyszukiwanie minimum i maksimum jednocześnie</h2>
-<h3>Idea</h3>
-<p>
-    Pierwsze rozwiązanie, które się nasuwa, to dwukrotne przejście przez tablicę z danymi.
-    Podczas pierwszego przebiegu szukamy minimum, podczas drugiego maksimum. Tym sposobem wykonamy
-    <span class="math">2 * (n - 1)</span> porównań. Wystarczy ich jednak wykonać <span class="math">3n/2 - 2</span>.
-    Skąd taka liczba? Możemy podzielić zbiór na 2 grupy: kandydaci na minimum i kandydaci ma maksimum. Zajmie to
-    <span class="math">n/2</span> porównań. Spośród tych podzbiorów wybieramy odpowiednio minimum i maksimum - zajmie to
-    <span class="math">2 * (n/2 - 1)</span> porównań.
-</p>
-<p>
-    Implementacja, którą przedstawiam poniżej prezentuje podejście @Html.ActionLink("dziel i zwyciężaj", "Index", "DivideAndConquer").
-    Rekurencyjnie będziemy dzielić zbiór na dwie połowy: jeśli dojdziemy do sytuacji, że zostaje 1 lub 2 elementy łatwo zwracamy parę (MIN, MAX).
-    Wyniki dla dwóch podzbiorów: (MIN_1, MAX_1), (MIN_2, MAX_2) łączymy w jeden przez 2 porównania: pierwsze to wybór mininim spośród MIN_1, MIN_2,
-    a drugie to analogiczny wybór maksimum.
-</p>
-
-<h3>Kod źródłowy</h3>
-<script src="https://gist.github.com/krzysiekkogut/65a875c1d8ea61aa9a1d2902266e6cc1.js"></script>
-
-<h3>Spróbuj!</h3>
-<div>
-    <p>Podaj liczby rozdzielone spacjami:</p>
-    <div class="form-group" style="margin-left: 0;">
-        @Html.TextBox("input", "", htmlAttributes: new { placeholder = "5 12 1 8 3 9 7", @class = "form-control", id = "input" })
-    </div>
-    <button onclick="getResults()" class="btn btn-primary">Znajdź minimum i maksimum</button>
-    <br /><br />
-    <div id="resultsContainer"></div>
-</div>
+<article>
+    <header>
+        <hgroup>
+            <h1>Wyszukiwanie minimum i maksimum jednocześnie</h1>
+            <h2>Idea</h2>
+        </hgroup>
+    </header>
+    <section>
+        <p>
+            Pierwsze rozwiązanie, które się nasuwa, to dwukrotne przejście przez tablicę z danymi.
+            Podczas pierwszego przebiegu szukamy minimum, podczas drugiego maksimum. Tym sposobem wykonamy
+            <span class="math">2 * (n - 1)</span> porównań. Wystarczy ich jednak wykonać <span class="math">3n/2 - 2</span>.
+            Skąd taka liczba? Możemy podzielić zbiór na 2 grupy: kandydaci na minimum i kandydaci ma maksimum. Zajmie to
+            <span class="math">n/2</span> porównań. Spośród tych podzbiorów wybieramy odpowiednio minimum i maksimum - zajmie to
+            <span class="math">2 * (n/2 - 1)</span> porównań.
+        </p>
+        <p>
+            Implementacja, którą przedstawiam poniżej prezentuje podejście @Html.ActionLink("dziel i zwyciężaj", "Index", "DivideAndConquer").
+            Rekurencyjnie będziemy dzielić zbiór na dwie połowy: jeśli dojdziemy do sytuacji, że zostaje 1 lub 2 elementy łatwo zwracamy parę (MIN, MAX).
+            Wyniki dla dwóch podzbiorów: (MIN_1, MAX_1), (MIN_2, MAX_2) łączymy w jeden przez 2 porównania: pierwsze to wybór mininim spośród MIN_1, MIN_2,
+            a drugie to analogiczny wybór maksimum.
+        </p>
+    </section>
+    <section>
+        <header>
+            <h1>Kod źródłowy</h1>
+        </header>
+        <script src="https://gist.github.com/krzysiekkogut/65a875c1d8ea61aa9a1d2902266e6cc1.js"></script>
+    </section>
+    <section>
+        <header>
+            <h1>Spróbuj!</h1>
+        </header>
+        <div>
+            <p>Podaj liczby rozdzielone spacjami:</p>
+            <div class="form-group" style="margin-left: 0;">
+                @Html.TextBox("input", "", htmlAttributes: new { placeholder = "5 12 1 8 3 9 7", @class = "form-control", id = "input" })
+            </div>
+            <button onclick="getResults()" class="btn btn-primary">Znajdź minimum i maksimum</button>
+            <br /><br />
+            <div id="resultsContainer"></div>
+        </div>
+    </section>
+</article>
