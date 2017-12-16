@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿using Algorithms.UI.Filters;
 using System.Web.Mvc;
 
 namespace Algorithms.UI
@@ -7,7 +7,7 @@ namespace Algorithms.UI
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new ErrorLoggingAttribute());
         }
     }
 }
